@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Display Control</title>
+</head>
+<body class="bg-gray-200">
+    <div class="container mx-auto">
+        <div class="flex justify-center items-center h-screen">
+            <div class="flex flex-col items-center">
+                <div class="card w-96 bg-base-100 shadow-xl">
+                    <figure class="px-10 pt-10">
+                        <img src="icon.png" alt="Shoes" class="rounded-xl w-32" />
+                    </figure>
+                    <div class="card-body items-center text-center">
+                        <h2 class="card-title">Display Control</h2>
+                        <p class="mt-[-5px]">Your favorite room decoration</p>
+                        <div class="mt-3 mb-3">
+                            <div role="tablist" class="tabs tabs-boxed">
+                                <a role="tab" class="tab" data-tab="effects">Visualiser</a>
+                                <a role="tab" class="tab tab-active" data-tab="scrolling-text">Scrolling text</a>
+                                <a role="tab" class="tab" data-tab="interactive">Interactive</a>
+                            </div>
+                        </div>
+
+                        <div id="effects" class="hidden">
+                            <div class="grid grid-cols-10 items-center gap-4 rounded-box border p-3 w-full mb-2">
+                                <div class="col-span-6">
+                                    <div class="text-left">
+                                        <p>Visualisation Effect</p>
+                                        <span class="text-sm text-gray-400">All are beautiful!</span> <!-- just like Julka... <3 -->
+                                    </div>
+                                </div>
+                                <div class="col-span-4">
+                                    <div class="text-right">
+                                        <select id="visualisationEffect" class="select select-bordered w-full max-w-xs">
+                                            <option selected>Spin</option>
+                                            <option>Raindrop</option>
+                                            <option>Dots</option>
+                                            <option>Wave</option>
+                                            <option>Fire</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-10 items-center gap-4 rounded-box border p-3 w-full mb-2">
+                                <div class="col-span-7">
+                                    <div class="text-left">
+                                        <p>Visualisation speed</p>
+                                        <span class="text-sm text-gray-400">Control scrolling speed.</span>
+                                    </div>
+                                </div>
+                                <div class="col-span-3">
+                                    <div class="text-right">
+                                        <input id="visualisationSpeed" type="range" min="0" max="100" value="25" class="range" />
+                                    </div>
+                                </div>
+                            </div>
+                            <button onclick="applyVisualiser()" class="btn btn-primary w-64 mt-4">Apply</button>
+                        </div>
+
+                        <div id="scrolling-text">
+                            <div class="grid grid-cols-10 items-center gap-4 rounded-box border p-3 w-full mb-2">
+                                <div class="col-span-7">
+                                    <div class="text-left">
+                                        <p>Scrolling direction</p>
+                                        <span class="text-sm text-gray-400">Direction of text scroll.</span>
+                                    </div>
+                                </div>
+                                <div class="col-span-3">
+                                    <div class="text-right">
+                                        <button id="scrollDirection" onclick="changeScrollDirection()" class="btn btn-content btn-sm w-16">Left</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-10 items-center gap-4 rounded-box border p-3 w-full mb-2">
+                                <div class="col-span-7">
+                                    <div class="text-left">
+                                        <p>Scrolling speed</p>
+                                        <span class="text-sm text-gray-400">Control scrolling speed.</span>
+                                    </div>
+                                </div>
+                                <div class="col-span-3">
+                                    <div class="text-right">
+                                        <input id="textScrollSpeed" type="range" min="0" max="100" value="25" class="range" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-10 items-center gap-4 rounded-box border p-3 w-full mb-2">
+                                <div class="col-span-7">
+                                    <div class="text-left">
+                                        <p>Text message</p>
+                                        <span class="text-sm text-gray-400">What do you want to see?</span>
+                                    </div>
+                                </div>
+                                <div class="col-span-3">
+                                    <div class="text-right">
+                                        <input id="textContent" type="text" placeholder="Text..." class="input input-bordered w-full max-w-xs" />
+                                    </div>
+                                </div>
+                            </div>
+                            <button onclick="applyText()" class="btn btn-primary w-64 mt-4">Apply</button>
+                        </div>
+
+                        <div id="interactive" class="hidden">
+                            <div class="grid grid-cols-10 items-center gap-4 rounded-box border p-3 w-full mb-2">
+                                <div class="col-span-6">
+                                    <div class="text-left">
+                                        <p>Trigger factor</p>
+                                        <span class="text-sm text-gray-400">Be interactive to?</span>
+                                    </div>
+                                </div>
+                                <div class="col-span-4">
+                                    <div class="text-right">
+                                        <select id="interactiveTrigger" class="select select-bordered w-full max-w-xs">
+                                            <option selected>Sound</option>
+                                            <option>Keyboard</option>
+                                            <option>Mouse</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-10 items-center gap-4 rounded-box border p-3 w-full mb-2">
+                                <div class="col-span-6">
+                                    <div class="text-left">
+                                        <p>Display effect</p>
+                                        <span class="text-sm text-gray-400">Make sure you pick right!</span>
+                                    </div>
+                                </div>
+                                <div class="col-span-4">
+                                    <div class="text-right">
+                                        <select id="interactiveEffect" class="select select-bordered w-full max-w-xs">
+                                            <option selected>Waveform</option>
+                                            <option>Spectrum</option>
+                                            <option>Metering</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <button onclick="applyInteractive()" class="btn btn-primary w-64 mt-4">Apply</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
